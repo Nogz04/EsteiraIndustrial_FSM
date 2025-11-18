@@ -1,0 +1,4 @@
+Running: xsim.dir/tb_controlador_esteira_behav/xsimk.exe -simmode gui -wdb tb_controlador_esteira_behav.wdb -simrunnum 0 -socket 52617
+Design successfully loaded
+Design Loading Memory Usage: 21948 KB (Peak: 21948 KB)
+Design Loading CPU Usage: 171 ms
