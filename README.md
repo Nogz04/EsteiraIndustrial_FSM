@@ -34,3 +34,27 @@ Este documento descreve detalhadamente os sinais utilizados no projeto VHDL do c
 | :--- | :--- | :--- | :--- |
 | **`estado_atual`** | Memória 💾 | Registrador da situação presente. | Define quais saídas devem estar ativas agora.<br>**Valores:** `LIGADO`, `PAUSADO`, `ERRO`. |
 | **`proximo_estado`** | Lógica 🔮 | Sinal combinacional. | Analisa o `estado_atual` e as **Entradas** para decidir o destino no próximo clock. |
+
+
+# Prints das Simulações:
+
+Após apertar o botão de partida para ligar o motor da esteira:
+
+<img width="707" height="274" alt="image" src="https://github.com/user-attachments/assets/1b7c111a-2aa9-4de8-95fa-3fb3d196cf4e" />
+
+Sensor de acúmulo detectou acúmulo:
+
+<img width="1304" height="333" alt="image" src="https://github.com/user-attachments/assets/690f2728-586a-47e0-a74f-64c3ac26773c" />
+
+Tenta ligar o motor com acúmulo mas continua pausado para segurança:
+
+<img width="733" height="269" alt="image" src="https://github.com/user-attachments/assets/0103de33-2a31-4af7-be70-96e078e6ed49" />
+
+Após tirar o acúmulo de peças, tenta ligar novamente e consegue ligar:
+
+<img width="851" height="256" alt="image" src="https://github.com/user-attachments/assets/1ae26c47-c3e1-49dc-a062-179c6a02b347" />
+
+Sensor de falha ativa, ativando o led de erro, enquanto não corrigir o erro, caso tente iniciar a esteira, irá continuar ligado o led de erro e a esteira desligada:
+
+<img width="736" height="258" alt="image" src="https://github.com/user-attachments/assets/a6a6a31c-0f0d-4fef-97af-a4d54e164cd3" />
+
