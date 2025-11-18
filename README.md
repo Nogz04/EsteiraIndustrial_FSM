@@ -2,9 +2,21 @@
 
 > Dupla: Matheus Nogueira e Pedro Chaves
 
+# 🎯 Objetivo do Projeto:
+
+O objetivo deste circuito é implementar um Controlador Digital de Esteira Industrial seguro e eficiente utilizando uma Máquina de Estados Finitos (FSM).
+
+O sistema visa automatizar o controle do motor da esteira, garantindo que:
+
+- **Eficiência:** A esteira pare automaticamente caso haja um acúmulo de peças na saída (evitando engarrafamentos).
+
+- **Segurança:** A esteira desligue imediatamente e trave em caso de falha crítica (sensor de falha).
+
+- **Controle:** O operador tenha controle manual de partida e feedback visual claro do estado da máquina através de LEDs.
+
 # 🏭 Variáveis do Controlador de Esteira (FSM)
 
-Este documento descreve detalhadamente os sinais utilizados no projeto VHDL do controlador de esteira industrial.
+Descrição detalhada dos sinais utilizados no projeto VHDL do controlador de esteira industrial.
 
 ## 📥 1. Entradas (Inputs)
 *Sinais que chegam do mundo externo para dentro do FPGA.*
@@ -36,7 +48,7 @@ Este documento descreve detalhadamente os sinais utilizados no projeto VHDL do c
 | **`proximo_estado`** | Lógica 🔮 | Sinal combinacional. | Analisa o `estado_atual` e as **Entradas** para decidir o destino no próximo clock. |
 
 
-# Prints das Simulações:
+# 📊 Prints das Simulações:
 
 Após apertar o botão de partida para ligar o motor da esteira:
 
@@ -58,3 +70,22 @@ Sensor de falha ativa, ativando o led de erro, enquanto não corrigir o erro, ca
 
 <img width="736" height="258" alt="image" src="https://github.com/user-attachments/assets/a6a6a31c-0f0d-4fef-97af-a4d54e164cd3" />
 
+# 📍 Diagrama de Estados (FSM)
+
+**Estado Inicial:** O sistema sempre inicia (ou reseta) no estado PAUSADO.
+
+- **Transição 1 (Partida):** De PAUSADO para LIGADO.
+
+  - **Condição:** Botão de partida pressionado (btn=1) E sem acúmulo de peças (acumulo=0).
+
+- **Transição 2 (Acúmulo):** De LIGADO para PAUSADO.
+
+  - **Condição:** Sensor de acúmulo ativado (acumulo=1). O motor para temporariamente.
+
+- **Transição 3 (Falha Crítica):** De Qualquer Estado para ERRO.
+
+  - **Condição:** Sensor de falha ativado (falha=1).
+
+- **Transição 4 (Recuperação):** De ERRO para PAUSADO.
+
+  - **Condição:** Apenas através do acionamento do RESET.
