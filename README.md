@@ -89,3 +89,68 @@ Sensor de falha ativa, ativando o led de erro, enquanto não corrigir o erro, ca
 - **Transição 4 (Recuperação):** De ERRO para PAUSADO.
 
   - **Condição:** Apenas através do acionamento do RESET.
+ 
+# ⚙️ Funcionamento Passo a Passo
+
+## Passo 1: Inicialização (Estado PAUSADO) 🟡
+Ao ligar o sistema ou pressionar o RESET, o circuito entra no modo de segurança.
+
+**Saídas:**  
+O motor permanece desligado. O LED Amarelo (Pausado) acende.
+
+O sistema fica aguardando o operador.
+
+---
+
+## Passo 2: Operação Normal (Estado LIGADO) 🟢
+O operador verifica se a esteira está livre e pressiona o botão **btn_partida**.
+
+Se o sensor_acumulo estiver livre ('0'), a máquina muda para o estado LIGADO.
+
+**Saídas:**  
+O Motor liga. O LED Amarelo apaga e o LED Verde (Ligado) acende.
+
+A produção ocorre normalmente.
+
+---
+
+## Passo 3: Gestão de Acúmulo (Volta para PAUSADO) 📦
+Durante a operação, se o sensor_acumulo detectar peças demais no fim da linha (sinal vai para '1').
+
+A máquina muda automaticamente para o estado PAUSADO.
+
+**Saídas:**  
+O Motor desliga imediatamente para evitar danos aos produtos.  
+O LED Verde apaga e o LED Amarelo acende.
+
+**Nota:** Para voltar a ligar, o operador deve limpar o acúmulo e pressionar o botão de partida novamente.
+
+---
+
+## Passo 4: Emergência (Estado ERRO) 🔴
+A qualquer momento (estando Pausado ou Ligado), se o sensor_falha for ativado (ex: superaquecimento).
+
+A máquina entra imediatamente no estado de ERRO.
+
+**Saídas:**  
+O motor é cortado (Desligado).  
+Os LEDs Verde e Amarelo apagam.  
+O LED Vermelho (Erro) acende.
+
+**Travamento:**  
+Neste estado, o botão de partida não funciona.  
+O sistema está travado por segurança.
+
+---
+
+## Passo 5: Reinício do Sistema 🔄
+Para sair do estado de ERRO, o problema físico deve ser resolvido e o operador deve pressionar o botão RESET.
+
+Isso leva a máquina de volta para o Passo 1 (PAUSADO).
+
+
+# Conclusão:
+
+> Iniciando pelas dificuldades enfrentadas nesse projeto, tivemos dificuldade em entender como funcionava uma esteira industrial e como poderíamos implementar o circuito na nossa, tendo em vista que nem todas são 100% iguais, outra dificuldade foi conseguir fazer com que após um estado específico, sincronzasse com as outras opções da esteira de forma automática, como: após um acumulo de peças (1), desligasse a esteira, mudasse o estado para pausado, etc...
+
+> Sobre aprendizados, aprendemos a sincronizar várias ações de um sistema ao mesmo tempo de forma automatizada, aprendemos como funciona o "pensamento automatizado" de uma esteira industrial, no caso, como ela funciona "por trás".
